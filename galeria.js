@@ -1,4 +1,5 @@
 window.addEventListener("load", init);
+
 const kepgaleria = [
   "kepek/folyo.jpg",
   "kepek/fak.jpg",
@@ -6,6 +7,9 @@ const kepgaleria = [
   "kepek/part.jpg",
   "kepek/virag.jpg",
 ];
+
+let kepIdx = 0;
+
 function init() {
   const kepekHelye = document.getElementsByClassName("art");
   let htmlszoveg = kihelyez(kepgaleria, kepekHelye);
@@ -16,7 +20,13 @@ function init() {
       kattintaskezelo(index);
     });
   }
+
+  let balgomb = document.getElementsByClassName("bal");
+  balgomb[0].addEventListener("click", balGomb);
+  let jobbgomb = document.getElementsByClassName("jobb");
+  jobbgomb[0].addEventListener("click", jobbGomb);
 }
+
 function kihelyez(kepgaleria, kepekHelye) {
   let htmlszoveg = "";
   for (let index = 0; index < kepgaleria.length; index++) {
@@ -33,4 +43,29 @@ function kattintaskezelo(i) {
   const NAGYKEP = document.querySelectorAll("section img");
   console.log(NAGYKEP);
   NAGYKEP[0].src = kepgaleria[i];
+  kepIdx = i;
+}
+
+function jobbGomb() {
+  kepIdx += 1;
+
+  if (kepIdx == kepgaleria.length) {
+    kepIdx = 0;
+  }
+
+  kattintaskezelo(kepIdx);
+  //const NAGYKEP = document.querySelectorAll("section img");
+  //NAGYKEP[0].src = kepgaleria[kepIdx];
+}
+
+function balGomb() {
+  kepIdx -= 1;
+
+  if (kepIdx < 0) {
+    kepIdx = kepgaleria.length - 1;
+  }
+
+  kattintaskezelo(kepIdx);
+  //const NAGYKEP = document.querySelectorAll("section img");
+  //NAGYKEP[0].src = kepgaleria[kepIdx];
 }
